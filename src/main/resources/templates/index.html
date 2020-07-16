@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智慧停车场</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/common.css">
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+</head>
+
+<body>
+<!-- 头部部分 -->
+<header>
+    <h3>智慧停车场欢迎您</h3>
+    <div class="logo">
+        <img src="images/logo.jpg">
+    </div>
+    <div>
+        <a href="/index">首页</a>
+    </div>
+    <div>
+        <a href="/login">登录</a>
+    </div>
+    <div>
+        <a href="/register">注册</a>
+    </div>
+    <span th:if="${session.user!= null && session.user.name!= null}">欢迎您 ：[[${session.user.name}]]</span>
+    <span th:unless="${session.user!= null}">请<a href="/login">登录</a></span>
+
+</header>
+
+<!--内容部分-->
+<main>
+    <!--功能栏-->
+    <div class="function">
+        <h3>停车管理系统</h3>
+        <dl>
+            <dt data-index="home" data-flag="0"><span class="glyphicon glyphicon-home"></span><h4>首页</h4><span
+                    class="glyphicon glyphicon-chevron-down"></span></dt>
+            <dd class="home" id="introduce" data-index="0" >介绍</dd>
+            <dd class="home" id="charge" data-index="1" >收费</dd>
+
+
+
+            <dt data-index="user" data-flag="0"><span class="glyphicon glyphicon-user"></span><h4>用户</h4><span
+                    class="glyphicon glyphicon-chevron-down"></span></dt>
+            <dd class="user" id="mesSelect"   data-index="2">信息查询</dd>
+            <dd class="user" id="mesUpdate"  data-index="3">信息修改</dd>
+            <dd class="user"  data-index="4">充值</dd>
+
+
+
+            <dt data-index="car" data-flag="0"><span class="glyphicon glyphicon-plane"></span><h4>车辆</h4><span
+                    class="glyphicon glyphicon-chevron-down"></span></dt>
+            <dd class="car"  data-index="5">车辆查询</dd>
+            <dd class="car"  data-index="6">增加</dd>
+
+            <dt data-index="admin" data-flag="0" th:if="${session.user!=null &&session.user.authority=='admin'}"><span class="glyphicon glyphicon-lock"></span><h4>管理员</h4><span
+                    class="glyphicon glyphicon-chevron-down"></span></dt>
+            <dd class="admin" th:if="${session.user!=null &&session.user.authority=='admin'}" data-index="7">车辆管理</dd>
+            <dd class="admin" th:if="${session.user!=null &&session.user.authority=='admin'}" data-index="8">用户管理</dd>
+
+            <dt data-index="set" data-flag="0"><span class="glyphicon glyphicon-cog"></span><h4>设置</h4><span
+                    class="glyphicon glyphicon-chevron-down"></span></dt>
+            <dd class="set"  data-index="9">修改密码</dd>
+            <dd class="set"  data-index="10">退出登录</dd>
+
+        </dl>
+    </div>
+    <!-- 消息栏 -->
+    <div class="message">
+        <div class="bigBox">
+            <nav class="header-nav">
+                <ul>
+                    <li class="pick">停车场简介 <span>x</span></li>
+                    <li>计费 <span>x</span></li>
+                    <li>信息查询<span>x</span></li>
+                    <li>信息修改<span>x</span></li>
+                    <li>余额充值<span>x</span></li>
+                    <li>车辆查询<span>x</span></li>
+                    <li>车辆绑定<span>x</span></li>
+                    <li>车辆管理<span>x</span></li>
+                    <li>用户管理<span>x</span></li>
+                    <li>忘记密码<span>x</span></li>
+                    <li>退出登录<span>x</span></li>
+                </ul>
+            </nav>
+
+            <div class="body">
+                <!--公司简介模块-->
+                <section class="show">
+                    <h3>智慧停车场简介</h3>
+                    <div class="time">发布时间：2020-6-01 作者：小明 来源：智慧官方</div>
+                    <div class="introduce">
+                        <p>&nbsp; &nbsp; 智慧停车场是智慧公司旗下产品，专为商业活动、购物、休闲提供的停车场地，共有停车位 700 个，其中地面停车位 400 个、地下停车位 300 个。
+                            停车场采用全智能化系统，车主不需领卡，车辆进入道闸处，系统将自动扫描车辆前牌照，并自动录入系统。在道闸前方的显示屏上即刻显示该车
+                            的牌照信息以及院内可停放车辆的数量。若显示“车辆已满”，车辆需在道闸 处等候；若显示可停数量，道闸将自动打开，车辆允许进入，进入后系统将 开始自动计时。智能化停车系统，便于管理
+                            ，不仅可以有效地解决乱停乱放造成的交通混乱，而且可以尽可能地减小车主失车被盗的风险。
+                        </p>
+                        <img src="images/parking.jpg" alt="">
+                        <img src="images/parking2.jpg" alt="">
+                    </div>
+                </section>
+                <!--计费模块-->
+                <section>
+                    <h3>智慧停车场计费简介</h3>
+                    <div class="time">发布时间：2020-6-01 作者：小明 来源：智慧官方</div>
+                    <div class="introduce">
+                        <h4>1.按时计费</h4>
+                        <p>
+                            小型车辆以 1.5 元 / 辆/ 时 大型车辆 2 元 / 辆 / 时
+                        </p>
+                        <h4>2.按天计费</h4>
+                        <p>小型车辆 15 元 / 辆 / 天   大型车辆 30 元 / 辆 / 天
+                        </p>
+                        <h4>3.vip计费</h4>
+                        <p>小型车辆以 1 元 / 辆/ 时 大型车辆 1.5 元 / 辆 / 时</p>
+                        <h4>4.永久车位</h4>
+                        <p>固定永久车位 49999元/位 终身享用 </p>
+                    </div>
+                </section>
+                <!--信息查询模块-->
+                <section>
+                    <h3>用户资料</h3>
+                    <span class="time" th:if="${session.user!= null && session.user.name!= null}">欢迎您 ：[[${session.user.name}]]</span>
+                    <form th:object="${session.user}">
+                        <ul>
+                            <li><span>账&nbsp;&nbsp;&nbsp;号</span><input type="text" th:if="${session.user!= null }"
+                                                                        th:value="*{username}"
+                                                                        readonly="true"><br/></li>
+                            <li><span>姓&nbsp;&nbsp;&nbsp;名</span><input type=" text " th:if="${session.user!= null }"
+                                                                        th:value="*{name}" readonly="true">
+                                <br/></li>
+                            <li><span>电&nbsp;&nbsp;&nbsp;话</span><input type="text" th:if="${session.user!= null }"
+                                                                        th:value="*{tel}" readonly="true">
+                                <br/></li>
+                            <li><span>权&nbsp;&nbsp;&nbsp;限</span><input type="text" th:if="${session.user!= null }"
+                                                                        th:value="*{authority}" readonly="true"> <br/>
+                            </li>
+                            <li><span>余&nbsp;&nbsp;&nbsp;额</span><input type=" text " th:if="${session.user!= null}"
+                                                                        th:value="*{money}" readonly="true"><br/>
+                            </li>
+                        </ul>
+                    </form>
+                    '
+                </section>
+                <!--信息修改模块-->
+                <section>
+                    <h3>用户资料</h3><span class="time" th:if="${session.user!= null}">欢迎您 ：[[${session.user.name}]]</span>
+                    <form th:object="${session.user}"  action="/updateUser" method="post" id="updateUser">
+                        <div class="control">
+                            <button class="btn btn-success updateUser" type="button">修改</button>
+                        </div>
+                        <ul>
+                            <li><span>账&nbsp;&nbsp;&nbsp;号</span><input  type="text" name='username' th:if="${session.user!= null }" th:value="*{username}" readonly="true"><br/></li>
+                            <li><span>姓&nbsp;&nbsp;&nbsp;名</span><input id="uname" type=" text " name='name' th:if="${session.user!= null }" th:value="*{name}"> <br/></li>
+                            <li><span>电&nbsp;&nbsp;&nbsp;话</span><input id="utel" type="text" name="tel" th:if="${session.user!= null }" th:value="*{tel}"> <br/></li>
+                            <span class="updateTip"></span>
+
+                        </ul>
+                    </form>
+                </section>
+                <!--充值模块-->
+                <section>
+                    <h3>余额充值</h3>
+                    <span class="time" th:if="${session.user!= null}">欢迎您 ：[[${session.user.name}]]</span>
+
+                    <form id="rechargeForm" action="/recharge" method="post">
+                        <ul>
+                            <li><span>余&nbsp;&nbsp;&nbsp;额</span><input  name="money" type="text" th:if="${session.user!= null}" th:value="${session.user.money}"><br/></li>
+                            <div class="upMoney">
+                                <a href="javascript:void(0)" class="btn btn-default">100</a>
+                                <a href="javascript:void(0)" class="btn btn-default">200</a>
+                                <a href="javascript:void(0)" class="btn btn-default">500</a>
+                            </div>
+                            <input  type="text" style="display: none" name="uid" th:if="${session.user!= null }" th:value="${session.user.uid}">
+                            <span class="tip">您的充值金额<input class="money" name="addMoney" value="100" readonly="true"></span><br>
+
+                            <button class="btn btn-danger" id="rechargeSubmit" type="button">充值</button>
+                        </ul>
+                    </form>
+                </section>
+                <!--车辆查询模块-->
+                <section>
+                    <h3>车辆查询</h3>
+                    <span class="hideUid" style="display: none" th:if="${session.user!= null}">[[${session.user.uid}]]</span>
+                    <span class="time" th:if="${session.user!= null && session.user.name!= null}">欢迎您 ：[[${session.user.name}]]</span>
+                    <div class="control" th:if="${session.user!= null && session.user.name!= null}">
+                        <button class="btn btn-success selectCar" type="button">查询</button>
+                    </div>
+
+                    <div th:unless="${session.user!= null && session.user.name!= null}" style="padding-left: 300px"><a href="/login">请登录</a></div>
+                    <table class="carTable">
+                        <tr><th>车编号</th><th>车名</th><th>车牌</th><th>是否在场</th><th>更新</th></tr>
+
+                    </table>
+                    <span class="findmsg"></span>
+
+                </section>
+                <!--车辆增加模块-->
+                <section>
+                    <div id="addCarMsg" style="display: none" th:if="${msg!=null}">[[${msg}]]</div>
+                    <form  id="bindingCarForm" action="/insertCar" method="post"  th:if="${session.user!= null && session.user.name!= null} ">
+                        <input  type="text" style="display: none" id="carID" name="uid" th:if="${session.user!= null }" th:value="${session.user.uid}">
+                        <ul>
+                            <li><span>车&nbsp;牌&nbsp;号</span><input type="text" id="license" name="license"></li>
+                            <li><span>车&nbsp;&nbsp;&nbsp;名</span><input type=" text " id="carName" name="carName"><br/></li>
+                        </ul>
+                        <button class="btn btn-danger" id="bindingCar" type="button">绑定</button>
+                    </form>
+                    <div th:unless="${session.user!= null && session.user.name!= null} "> <a href="/login">请登录</a></div>
+                    <span class="addCarMsg"></span>
+                </section>
+                <!--车辆管理模块-->
+                <section>
+                    <h3>车辆管理查询</h3>
+                    <span class="time" th:if="${session.user!= null && session.user.name!= null}">欢迎您 ：[[${session.user.name}]]</span>
+                    <div class="control" th:if="${session.user!= null && session.user.name!= null}">
+                        <button class="btn btn-success" id="selectFindAll" type="button" >查询所有</button>
+                        <a class="btn btn-danger" id="selectFindInParking" type="button">查询在库</a>
+                    </div>
+
+                    <div th:unless="${session.user!= null && session.user.name!= null}" style="padding-left: 300px"><a href="/login">请登录</a></div>
+                    <table class="adminCarTable">
+                        <tr><th>车编号</th><th>车名</th><th>车牌</th><th>是否在场</th></tr>
+                    </table>
+                    <span class="adminFindMsg"></span>
+
+                </section>
+                <!---用户管理模块-->
+                <section>
+                    <h3>车辆管理查询</h3>
+                    <span class="time" th:if="${session.user!= null && session.user.name!= null}">欢迎您 ：[[${session.user.name}]]</span>
+                    <div class="control" th:if="${session.user!= null && session.user.name!= null}">
+                        <button class="btn btn-success" id="selectUserFindAll" type="button" >查询所有用户</button>
+
+                    </div>
+
+                    <div th:unless="${session.user!= null && session.user.name!= null}" style="padding-left: 300px"><a href="/login">请登录</a></div>
+                    <table class="adminUserTable">
+                        <tr><th>用户id</th><th>用户名</th><th>电话</th><th>姓名</th><th>余额</th></tr>
+                    </table>
+                    <span class="adminUserFindMsg"></span>
+                </section>
+                <!---忘记密码-->
+                <section>
+                    <h3>退出登录</h3>
+                    <p>功能开发中</p>
+                </section>
+                <!---退出登录-->
+                <section>
+                    <h3>忘记密码</h3>
+                    <p><a href="/quitLogin">退出登录</a></p>
+                </section>
+            </div>
+        </div>
+
+    </div>
+</main>
+<footer>
+    <div class="link ">
+        <div class="container ">
+            <hr>
+            <div class="row ">
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">关于我们</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">联系我们</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">联系客服</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">合作招商</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">商家帮助</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">营销中心</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">手机app</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">友情链接</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">销售联盟</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">购社区</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">风险监测</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">隐私测略</a></div>
+            </div>
+        </div>
+    </div>
+
+    <p class="container ">广告投放合作：6666 站长信箱：6666. 免责声明：本站所有内容来源于互联网。如果本站部分内容侵犯您的权益，请您告知， 所做网址只为学习，不做任何商业活动。
+
+    </p>
+
+    <hr>
+</footer>
+<script src="js/index.js"></script>
+</body>
+
+</html>

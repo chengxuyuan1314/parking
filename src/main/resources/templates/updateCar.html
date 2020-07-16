@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>智慧-欢迎登录</title>
+    <!-- bootstrap样式 公共样式 基础样式 专有引入 网址ico引入 -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/updateCar.css">
+    <script src="/js/jquery-1.11.0.min.js"></script>
+
+</head>
+
+<body>
+<!-- 头部部分 -->
+<header>
+    <h3>智慧停车场欢迎您</h3>
+    <div class="logo">
+        <img src="/images/logo.jpg">
+    </div>
+    <div>
+        <a href="/index">首页</a>
+    </div>
+    <div>
+        <a href="/login">登录</a>
+    </div>
+    <div>
+        <a href="/register">注册</a>
+    </div>
+    <span>理念： 全心全意为客户服务</span>
+</header>
+
+<!--内容部分-->
+
+
+<main>
+
+    <h3>信息修改</h3><span class="time" th:if="${session.user!= null}">欢迎您 ：[[${session.user.name}]]</span>
+    <form th:object="${car}"  action="/updateCarDao" method="post" id="updateCar">
+        <div class="control">
+            <button class="btn btn-success updateCar" type="button">修改</button>
+        </div>
+        <ul>
+            <li><span>车&nbsp;编&nbsp;号</span><input id="cid" type="cid" name='cid' th:if="${car!= null }" th:value="*{cid}" readonly="true"><br/></li>
+            <li><span>车&nbsp;&nbsp;&nbsp;名</span><input id="carName" type=" text " name='carName' th:if="${car!= null }" th:value="*{carName}"> <br/></li>
+            <li><span>车&nbsp; 牌 &nbsp;</span><input id="license" type="text" name="license" th:if="${car!= null }" th:value="*{license}"> <br/></li>
+            <span class="updateTip" th:if="${msg!=null}">[[${msg}]]</span>
+
+        </ul>
+    </form>
+
+</main>
+
+
+<!-- 公共尾部 -->
+
+<footer>
+    <div class="link ">
+        <div class="container ">
+            <hr>
+            <div class="row ">
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">关于我们</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">联系我们</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">联系客服</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">合作招商</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">商家帮助</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">营销中心</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">手机app</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">友情链接</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">销售联盟</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">购社区</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">风险监测</a></div>
+                <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">隐私测略</a></div>
+            </div>
+        </div>
+    </div>
+
+    <p class="container ">广告投放合作：6666 站长信箱：6666. 免责声明：本站所有内容来源于互联网。如果本站部分内容侵犯您的权益，请您告知， 所做网址只为学习，不做任何商业活动。
+
+    </p>
+
+    <hr>
+</footer>
+<script>
+    $(".updateCar").on('click',function () {
+        if ($("#cid").val() == '' || $("#carName").val() == '' || $('#license').val() == '') {
+            $(".updateTip").text("驾照车名不能为空");
+        }else {
+            $('#updateCar').submit();
+        }
+    })
+</script>
+</body>
+</html>

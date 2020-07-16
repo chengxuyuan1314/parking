@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jlyk.mapper.CarMapper">
+
+    <resultMap id="car" type="com.jlyk.domain.Car">
+        <id property="cid" column="cid"></id>
+        <result property="license" column="license"></result>
+        <result property="carName" column="carname"></result>
+        <result property="inParking" column="inparking"></result>
+    </resultMap>
+
+
+    <select id="findByUID" resultMap="car" parameterType="int">
+       SELECT c.* FROM car c , car_user cu ,USER u WHERE u.`uid`=cu.uid AND c.cid =cu.cid AND u.uid=#{uid}
+    </select>
+
+
+
+</mapper>

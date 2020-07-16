@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>智慧-欢迎-注册</title>
+    <!-- bootstrap样式 公共样式 基础样式 专有引入 网址ico引入 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/register.css">
+    <script src="js/jquery-1.11.0.min.js"></script>
+
+</head>
+
+<body>
+    <!-- 头部部分 -->
+    <header>
+        <h3>智慧停车场欢迎您</h3>
+        <div class="logo">
+            <img src="images/logo.jpg">
+        </div>
+        <div>
+            <a href="index">首页</a>
+        </div>
+        <div>
+            <a href="login">登录</a>
+        </div>
+        <div>
+            <a href="register">注册</a>
+        </div>
+        <span>理念： 全心全意为客户服务</span>
+    </header>
+
+    <!--内容部分-->
+
+
+    <main>
+        <div class="login">
+            <h3>登录</h3>
+            <span class="error"></span>
+            <div class="ln-form">
+                <form action="/insertUser" method="post" id="form">
+                    <label for="username"><span class="glyphicon glyphicon-user"></span></label><input id="username" name="username" type="text" value="用户名" onfocus="this.select()" onClick=" this.style.color='black' ">
+                    <br>
+                    <label for="password"><span class="glyphicon glyphicon-lock "></span></label><input id="password" name="password" type="password " onfocus="this.select()" onClick="this.style.color='black' ">
+                    <br>
+                    <label for="repsw"><span class="glyphicon glyphicon-lock"></span></label><input id="repsw" name="repsw" type="password" onfocus="this.select()" onClick=" this.style.color='black' ">
+                    <br>
+                    <label for="tel"><span class="glyphicon glyphicon-earphone "></span></label><input id="tel" name="tel" type="tel" onfocus="this.select()" onClick="this.style.color='black' ">
+                    <br>
+                    <label for="name"><span class="glyphicon glyphicon-user"></span></label><input id="name" name="name" type="text" value="姓名" onfocus="this.select()" onClick=" this.style.color='black' ">
+                    <br>
+
+
+                </form>
+                <div class="forget "><a href="# ">没账号？，马上去注册</a></div>
+                <div class="enter ">
+                    <a href="javascript:void(0)" id="login">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+
+
+    <!-- 公共尾部 -->
+
+    <footer>
+        <div class="link ">
+            <div class="container ">
+                <hr>
+                <div class="row ">
+                    <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">关于我们</a></div>
+                    <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">联系我们</a></div>
+                    <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">联系客服</a></div>
+                    <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">合作招商</a></div>
+                    <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">商家帮助</a></div>
+                    <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">营销中心</a></div>
+                    <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">手机app</a></div>
+                    <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">友情链接</a></div>
+                    <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">销售联盟</a></div>
+                    <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">购社区</a></div>
+                    <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">风险监测</a></div>
+                    <div class="col-md-1 col-sm-2 col-xs-3 "><a href="# ">隐私测略</a></div>
+                </div>
+            </div>
+        </div>
+
+        <p class="container ">广告投放合作：6666 站长信箱：6666. 免责声明：本站所有内容来源于互联网。如果本站部分内容侵犯您的权益，请您告知， 所做网址只为学习，不做任何商业活动。
+
+        </p>
+
+        <hr>
+    </footer>
+    <script src="js/register.js" ></script>
+</body>
+
+</html>

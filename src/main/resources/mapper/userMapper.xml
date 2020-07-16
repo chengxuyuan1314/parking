@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jlyk.mapper.UserMapper">
+
+    <resultMap id="user" type="com.jlyk.domain.User">
+        <id property="uid" column="uid"></id>
+        <result property="username" column="username"></result>
+        <result property="password" column="password"></result>
+        <result property="tel" column="tel"></result>
+        <result property="money" column="money"></result>
+        <result property="name" column="name"></result>
+        <result property="authority" column="authority"></result>
+
+    </resultMap>
+
+
+    <select id="findByUsernameAndPassword" resultMap="user">
+        SELECT  u.* ,a.`authority`  FROM  USER u , authority a ,user_authority ua
+        WHERE ua.`aid` =  a.`vid` AND ua.`uid`=u.`uid` AND username= #{username} AND PASSWORD = #{password}
+    </select>
+    
+    <select id="findByID" resultMap="user" parameterType="int">
+         SELECT  u.* ,a.`authority`  FROM  USER u , authority a ,user_authority ua
+        WHERE ua.`aid` =  a.`vid` AND ua.`uid`=u.`uid` AND  u.uid = #{uid}
+    </select>
+    <select id="findByUsername" resultMap="user" parameterType="String">
+         SELECT  u.* ,a.`authority`  FROM  USER u , authority a ,user_authority ua
+        WHERE ua.`aid` =  a.`vid` AND ua.`uid`=u.`uid` AND  u.username = #{username}
+    </select>
+    <select id="findByCid" resultMap="user" parameterType="int">
+          SELECT u.* ,a.`authority` FROM car c ,authority a ,user_authority ua, car_user cu ,USER u
+          WHERE u.`uid`=cu.uid AND c.cid =cu.cid and ua.`aid` =  a.`vid` AND ua.`uid`=u.`uid` AND c.cid=#{cid}
+    </select>
+
+
+</mapper>
